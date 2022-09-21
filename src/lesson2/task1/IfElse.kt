@@ -81,7 +81,15 @@ fun timeForHalfWay(
     t1: Double, v1: Double,
     t2: Double, v2: Double,
     t3: Double, v3: Double
-): Double = TODO()
+): Double {
+    val distance = (t1 * v1 + t2 * v2 + t3 * v3) * 0.5
+    val time = distance - t1 * v1
+    return when {
+        distance <= t1 * v1 -> distance / v1
+        (time > 0) and (time <= (t1 * v1 + t2 * v2)) -> time / v2 + t1
+        else -> (time - t2 * v2) / v3 + t1 + t2
+    }
+}
 
 /**
  * Простая (2 балла)
@@ -123,6 +131,7 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+
 
 /**
  * Средняя (3 балла)
