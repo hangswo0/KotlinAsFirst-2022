@@ -4,6 +4,7 @@ package lesson2.task1
 
 import lesson1.task1.discriminant
 import kotlin.math.max
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 // Урок 2: ветвления (здесь), логический тип (см. 2.2).
@@ -130,7 +131,18 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    val maximumSide = maxOf(a, b, c)
+    val minimumSide = minOf(a, b, c)
+    val midleSide = a + b + c - maximumSide - minimumSide
+    if ((midleSide + minimumSide > maximumSide) and (midleSide + maximumSide > minimumSide)
+        and (maximumSide + minimumSide > midleSide)) {
+        if (maximumSide.pow(2.0) < midleSide.pow(2.0) + minimumSide.pow(2.0)) return 0
+        if (maximumSide.pow(2.0) == midleSide.pow(2.0) + minimumSide.pow(2.0)) return 1
+        if (maximumSide.pow(2.0) > midleSide.pow(2.0) + minimumSide.pow(2.0)) return 2
+    }
+    return -1
+}
 
 
 /**
