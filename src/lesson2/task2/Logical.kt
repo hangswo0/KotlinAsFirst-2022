@@ -3,6 +3,8 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import kotlin.math.max
+import kotlin.math.min
 //import sun.font.TrueTypeFont
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -47,7 +49,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  */
 fun daysInMonth(month: Int, year: Int): Int {
     return when {
-        ((month % 2 == 1) && (1 <= month) && (month <= 7))-> 31
+        ((month % 2 == 1) && (1 <= month) && (month <= 7)) -> 31
         ((month % 2 == 0) && (8 <= month) && (month <= 12)) -> 31
         ((month % 2 == 0) && (4 <= month) && (month <= 6)) -> 30
         ((month % 2 == 1) && (9 <= month) && (month <= 11)) -> 30
@@ -80,4 +82,9 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+    val maxSide = maxOf(a, b, c)
+    val minSide = minOf(a, b, c)
+    val midSide = a + b + c - maxSide - minSide
+    return ((max(r, s) >= midSide) && (min(r, s) >= minSide))
+}
