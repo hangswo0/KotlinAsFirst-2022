@@ -3,6 +3,9 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+//import sun.font.TrueTypeFont
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 /**
  * Пример
@@ -44,13 +47,13 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  */
 fun daysInMonth(month: Int, year: Int): Int {
     return when {
-        ((month % 2 == 1) and (1 <= month) and (month <= 7))-> 31
-        ((month % 2 == 0) and (8 <= month) and (month <= 12)) -> 31
-        ((month % 2 == 0) and (4 <= month) and (month <= 6)) -> 30
-        ((month % 2 == 1) and (9 <= month) and (month <= 11)) -> 30
-        ((year % 400 == 0) and (month == 2)) -> 29
-        ((year % 100 == 0) and (month == 2)) -> 28
-        ((year % 4 == 0) and (month == 2)) -> 29
+        ((month % 2 == 1) && (1 <= month) && (month <= 7))-> 31
+        ((month % 2 == 0) && (8 <= month) && (month <= 12)) -> 31
+        ((month % 2 == 0) && (4 <= month) && (month <= 6)) -> 30
+        ((month % 2 == 1) && (9 <= month) && (month <= 11)) -> 30
+        ((year % 400 == 0) && (month == 2)) -> 29
+        ((year % 100 == 0) && (month == 2)) -> 28
+        ((year % 4 == 0) && (month == 2)) -> 29
         else -> 28
     }
 }
@@ -66,7 +69,7 @@ fun daysInMonth(month: Int, year: Int): Int {
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+): Boolean = sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2
 
 /**
  * Средняя (3 балла)
