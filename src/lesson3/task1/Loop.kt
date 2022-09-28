@@ -2,6 +2,8 @@
 
 package lesson3.task1
 
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -72,7 +74,15 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var count = 0
+    var number = n
+    do {
+        count++
+        number /= 10
+    } while (number > 0)
+    return count
+}
 
 /**
  * Простая (2 балла)
@@ -87,14 +97,32 @@ fun fib(n: Int): Int = TODO()
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var divid = 2
+    for (m in 2..n) {
+        if (n % m == 0) {
+            divid = m
+            break
+        }
+    }
+    return divid
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    var divid = 2
+    for (m in 2..n) {
+        if (n % m == 0) {
+            divid = m
+            break
+        }
+    }
+    return n / divid
+}
 
 /**
  * Простая (2 балла)
@@ -120,7 +148,16 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    var minimalMultiple = max(m, n)
+    for (k in max(m, n)..n * m) {
+        if ((k % n == 0) && (k % m == 0)) {
+            minimalMultiple = k
+            break
+        }
+    }
+    return minimalMultiple
+}
 
 /**
  * Средняя (3 балла)
@@ -129,7 +166,16 @@ fun lcm(m: Int, n: Int): Int = TODO()
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    var count = 0
+    for (k in 2..min(m, n)) {
+        if ((m % k == 0) && (n % k == 0)) {
+            count++
+            break
+        }
+    }
+    return count == 0
+}
 
 /**
  * Средняя (3 балла)
