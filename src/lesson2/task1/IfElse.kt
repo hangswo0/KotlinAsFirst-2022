@@ -84,11 +84,11 @@ fun timeForHalfWay(
     t3: Double, v3: Double
 ): Double {
     val distance = (t1 * v1 + t2 * v2 + t3 * v3) * 0.5
-    val time = distance - t1 * v1
+    val distance1 = distance - t1 * v1
     return when {
         distance <= t1 * v1 -> distance / v1
-        (time > 0) and (distance <= (t1 * v1 + t2 * v2)) -> time / v2 + t1
-        else -> (time - t2 * v2) / v3 + t1 + t2
+        (distance1 > 0) and (distance <= (t1 * v1 + t2 * v2)) -> distance1 / v2 + t1
+        else -> (distance1 - t2 * v2) / v3 + t1 + t2
     }
 }
 
