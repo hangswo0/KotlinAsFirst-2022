@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sqrt
@@ -76,7 +77,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  */
 fun digitNumber(n: Int): Int {
     var count = 0
-    var number = n
+    var number = abs(n)
     do {
         count++
         number /= 10
@@ -140,7 +141,20 @@ fun maxDivisor(n: Int): Int {
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int = TODO()
+fun collatzSteps(x: Int): Int {
+    var xNew = 0
+    var count = 0
+    var X = x
+    while (X != 1) {
+        if (X % 2 == 0)
+            xNew = X/2
+        else
+            xNew = X * 3 + 1
+        count++
+        X = xNew
+    }
+    return count
+}
 
 /**
  * Средняя (3 балла)
@@ -184,7 +198,15 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var oldN = n
+    var newN = 0
+    do {
+        newN = newN * 10 + oldN % 10
+        oldN = oldN / 10
+    } while (oldN > 0)
+    return newN
+}
 
 /**
  * Средняя (3 балла)
@@ -195,7 +217,15 @@ fun revert(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean {
+    var N = 0
+    var n2 = n
+    do {
+        N = N * 10 + n2 % 10
+        n2 /= 10
+    } while (n2 > 0)
+    return (N == n)
+}
 
 /**
  * Средняя (3 балла)
