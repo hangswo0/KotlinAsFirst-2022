@@ -163,14 +163,14 @@ fun collatzSteps(x: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var minimalMultiple = max(m, n)
-    for (k in max(m, n)..n * m) {
-        if ((k % n == 0) && (k % m == 0)) {
-            minimalMultiple = k
+    var maximalDivisor = min(m, n)
+    for (k in min(m, n) downTo 1) {
+        if ((m % k == 0) && (n % k == 0)) {
+            maximalDivisor = k
             break
         }
     }
-    return minimalMultiple
+    return (m * n) / maximalDivisor
 }
 
 /**
@@ -269,6 +269,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun squareSequenceDigit(n: Int): Int = TODO()
+
 
 /**
  * Сложная (5 баллов)
