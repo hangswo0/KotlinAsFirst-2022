@@ -140,12 +140,12 @@ fun rookOrBishopThreatens(
 fun triangleKind(a: Double, b: Double, c: Double): Int {
     val maximumSide = maxOf(a, b, c)
     val minimumSide = minOf(a, b, c)
-    val middleSide = a + b + c - maximumSide - minimumSide
-    if ((middleSide + minimumSide > maximumSide) and (middleSide + maximumSide > minimumSide)
-        and (maximumSide + minimumSide > middleSide)) {
-        if (maximumSide.pow(2.0) < middleSide.pow(2.0) + minimumSide.pow(2.0)) return 0
-        if (maximumSide.pow(2.0) == middleSide.pow(2.0) + minimumSide.pow(2.0)) return 1
-        if (maximumSide.pow(2.0) > middleSide.pow(2.0) + minimumSide.pow(2.0)) return 2
+    val midddleSide = a + b + c - maximumSide - minimumSide
+    if ((midddleSide + minimumSide > maximumSide) and (midddleSide + maximumSide > minimumSide)
+        and (maximumSide + minimumSide > midddleSide)) {
+        if (maximumSide.pow(2.0) < midddleSide.pow(2.0) + minimumSide.pow(2.0)) return 0
+        if (maximumSide.pow(2.0) == midddleSide.pow(2.0) + minimumSide.pow(2.0)) return 1
+        if (maximumSide.pow(2.0) > midddleSide.pow(2.0) + minimumSide.pow(2.0)) return 2
     }
     return -1
 }
