@@ -257,7 +257,7 @@ fun hasDifferentDigits(n: Int): Boolean {
     while (newN > 0) {
         if (newN % 10 == lastDigit) {
             counter++
-            lastDigit = newN / 10
+            lastDigit = newN % 10
         } else {
             counter = -1
             break
