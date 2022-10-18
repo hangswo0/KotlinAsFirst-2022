@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import lesson8.task1.findNearestCirclePair
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -91,7 +92,21 @@ fun digitNumber(n: Int): Int {
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var f1 = 1
+    var f2 = 1
+    var fn = 0
+    var currentNumber = 3
+    if ((n == 1) || (n == 2)) return 1 else {
+        while (currentNumber <= n) {
+            fn = f1 + f2
+            f1 = f2
+            f2 = fn
+            currentNumber++
+        }
+    }
+    return fn
+}
 
 /**
  * Простая (2 балла)
@@ -203,7 +218,7 @@ fun revert(n: Int): Int {
     var newN = 0
     do {
         newN = newN * 10 + oldN % 10
-        oldN = oldN / 10
+        oldN /= 10
     } while (oldN > 0)
     return newN
 }
@@ -235,8 +250,22 @@ fun isPalindrome(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
-
+fun hasDifferentDigits(n: Int): Boolean {
+    var newN = n / 10
+    var lastDigit = n % 10
+    var counter = 0
+    while (newN > 0) {
+        if (newN % 10 == lastDigit) {
+            counter++
+            lastDigit = newN / 10
+        } else {
+            counter = -1
+            break
+        }
+        newN /= 10
+    }
+    if ((counter != -1) || (n == 0)) return false else return true
+}
 /**
  * Средняя (4 балла)
  *
