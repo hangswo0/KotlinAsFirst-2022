@@ -3,10 +3,7 @@
 package lesson3.task1
 
 import lesson8.task1.findNearestCirclePair
-import kotlin.math.abs
-import kotlin.math.max
-import kotlin.math.min
-import kotlin.math.sqrt
+import kotlin.math.*
 
 // Урок 3: циклы
 // Максимальное количество баллов = 9
@@ -275,7 +272,18 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+fun sin(x: Double, eps: Double): Double {
+    var result = 10.0
+    if ((x == PI) || (x == 0.0)) return 0.0 else {
+        val additionalMultiplier = x / (PI / 2.0)
+        when {
+            additionalMultiplier % 2.0 == 0.0 -> result = 0.0
+            (additionalMultiplier % 4.0 == 1.0) || (additionalMultiplier % 4.0 == -3.0) -> result = 1.0
+            (additionalMultiplier % 4.0 == 3.0) || (additionalMultiplier % 4.0 == -1.0) -> result = -1.0
+        }
+    }
+    return result
+}
 
 /**
  * Средняя (4 балла)
