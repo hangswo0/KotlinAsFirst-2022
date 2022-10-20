@@ -273,16 +273,26 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
 fun sin(x: Double, eps: Double): Double {
-    var result = 10.0
+    var n = 1
+    var sinX = 0.0
+    var rowMember = x
+    while (abs(rowMember) >= eps) {
+        when {
+            n % 4.0 == 3.0 -> sinX -= x.pow(n) / factorial(n)
+            else -> sinX += x.pow(n) / factorial(n)
+        }
+        rowMember = x.pow(n) / factorial(n)
+        n += 2
+    }
     if ((x == PI) || (x == 0.0)) return 0.0 else {
         val additionalMultiplier = x / (PI / 2.0)
         when {
-            additionalMultiplier % 2.0 == 0.0 -> result = 0.0
-            (additionalMultiplier % 4.0 == 1.0) || (additionalMultiplier % 4.0 == -3.0) -> result = 1.0
-            (additionalMultiplier % 4.0 == 3.0) || (additionalMultiplier % 4.0 == -1.0) -> result = -1.0
+            additionalMultiplier % 2.0 == 0.0 -> sinX = 0.0
+            (additionalMultiplier % 4.0 == 1.0) || (additionalMultiplier % 4.0 == -3.0) -> sinX = 1.0
+            (additionalMultiplier % 4.0 == 3.0) || (additionalMultiplier % 4.0 == -1.0) -> sinX = -1.0
         }
     }
-    return result
+    return sinX
 }
 
 /**
