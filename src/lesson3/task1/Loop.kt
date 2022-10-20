@@ -276,7 +276,7 @@ fun sin(x: Double, eps: Double): Double {
     var n = 1
     var sinX = 0.0
     var rowMember = x
-    while (abs(rowMember) >= eps) {
+    while (abs(rowMember) > abs(eps)) {
         when {
             n % 4.0 == 3.0 -> sinX -= x.pow(n) / factorial(n)
             else -> sinX += x.pow(n) / factorial(n)
