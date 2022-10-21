@@ -346,4 +346,23 @@ fun squareSequenceDigit(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    var j = 1.0
+    var u = 0.0
+    var count = 0.0
+    var digit = 0.0
+    var result = 0.0
+    if (n == 1) return 1
+    while (count.toInt() < n) {
+        u = fib(j.toInt()).toDouble()      //число фибоначчи
+        digit = u                          //текущее число
+        count += digitNumber(digit.toInt())         //счетчик кол-ва цифр в последовательности
+        j += 1.0
+        if (count.toInt() < n) continue
+        else {
+            result = (digit % (10.0).pow(count - n + 1)) / ((10.0).pow(count - n))
+        }
+    }
+    return result.toInt()
+}
+
