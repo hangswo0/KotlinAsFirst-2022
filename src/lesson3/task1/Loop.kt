@@ -316,17 +316,26 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
-
-fun numberOfDigits(n: Double): Double {
-    var N = n
+fun squareSequenceDigit(n: Int): Int {
+    var j = 1.0
+    var u = 0.0
     var count = 0.0
-    while (n != 0.0) {
-        N /= 10
-        count++
+    var digit = 0.0
+    var result = 0.0
+    if (n == 1) return 1
+    while (count.toInt() < n) {
+        u = j.pow(2)      //число в квадрате
+        digit = u            //текущее число
+        count += digitNumber(digit.toInt())         //счетчик кол-ва цифр в последовательности
+        j += 1.0
+        if (count.toInt() < n) continue
+        else {
+            result = (digit % (10.0).pow(count - n + 1)) / ((10.0).pow(count - n))
+        }
     }
-    return count
+    return result.toInt()
 }
+
 
 /**
  * Сложная (5 баллов)
