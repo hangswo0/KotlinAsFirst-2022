@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import lesson1.task1.sqr
 import lesson8.task1.findNearestCirclePair
 import kotlin.math.*
 
@@ -315,8 +316,33 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var j = 1.0
+    var u = 1.0
+    var count = 0.0
+    var digit = 0.0
+    var result = 0.0
+    while (count < n.toDouble()) {
+        u = j.pow(2)      //число в квадрате
+        digit = u            //текущее число
+        count += numberOfDigits(u)         //счетчик кол-ва цифр в последовательности
+        if (count >= n.toDouble()) {
+            result = (digit % (10.0).pow(count - n + 1)) / ((10.0).pow(count - n))
+        }
+        j += 1.0
+    }
+    return result.toInt()
+}
 
+fun numberOfDigits(n: Double): Double {
+    var N = n
+    var count = 0.0
+    while (n != 0.0) {
+        N /= 10
+        count++
+    }
+    return count
+}
 
 /**
  * Сложная (5 баллов)
