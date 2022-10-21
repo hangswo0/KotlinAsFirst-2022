@@ -347,11 +347,11 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    var j = 1.0
-    var u = 0.0
-    var count = 0.0
-    var digit = 0.0
-    var result = 0.0
+    var j = 1.0           //переменная, которая будет меняться в ходе выполнения цикла
+    var u = 0.0           //переменная, равная числу фибоначчи числа j
+    var count = 0.0       //переменная-счетчик длины текущей последовательности
+    var digit = 0.0       //текущее число фибоначчи
+    var result = 0.0      //конечный результат
     if (n == 1) return 1
     while (count.toInt() < n) {
         u = fib(j.toInt()).toDouble()      //число фибоначчи
