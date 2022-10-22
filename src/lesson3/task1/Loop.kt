@@ -277,13 +277,12 @@ fun sin(x: Double, eps: Double): Double {
     var n = 1
     var sinX = 0.0
     var rowMember = x
-    while (abs(rowMember) >= abs(eps)) {
+    while (abs(sinX) >= abs(eps)) {
         when {
             n % 4.0 == 3.0 -> sinX -= x.pow(n) / factorial(n)
             else -> sinX += x.pow(n) / factorial(n)
         }
         n += 2
-        rowMember = x.pow(n) / factorial(n)
     }
     if ((x == PI) || (x == 0.0)) return 0.0 else {
         val additionalMultiplier = x / (PI / 2.0)
