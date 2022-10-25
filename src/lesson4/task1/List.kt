@@ -266,8 +266,20 @@ fun convert(n: Int, base: Int): List<Int> {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String = TODO()
-//соответствие цифры числу по коду (?)
+fun convertToString(n: Int, base: Int): String {
+    val alf = "abcdefghijklmnopqrstuvwxyz"
+    var number = 0
+    var result = ""
+    val digit = convert(n, base)
+    for (i in 0 until digit.size) {
+        if (digit[i] < 10) {
+            number = digit[i]
+            result += "$number"
+        } else result += alf[digit[i] - 10]
+    }
+    return result
+}
+
 /**
  * Средняя (3 балла)
  *
