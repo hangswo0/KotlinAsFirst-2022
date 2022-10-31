@@ -6,6 +6,7 @@ import lesson1.task1.discriminant
 import kotlin.math.pow
 import kotlin.math.sqrt
 import kotlin.math.*
+import lesson3.task1.digitNumber
 
 // Урок 4: списки
 // Максимальное количество баллов = 12
@@ -144,8 +145,8 @@ fun mean(list: List<Double>): Double {
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
-    /* if (list.size != 0) {
+fun center(list: MutableList<Double>): MutableList<Double> = TODO() /* {
+     if (list.size != 0) {
         for (i in 0 until list.size) {
             list[i] = list[i] - list.sum() / list.size
         }
@@ -309,7 +310,23 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, str.toInt(base)), запрещается.
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val alf = "abcdefghijklmnopqrstuvwxyz"
+    val digits = "0123456789"
+    var newStr = str
+    var n = '0'
+    var result = 0
+    while (newStr.length != 0) {
+        n = newStr[0]
+        if (n in digits) {
+            result += n.digitToInt() * base.toDouble().pow(newStr.length - 1).toInt()
+        } else if (n in alf) {
+            result += (alf.indexOf(n, 0) + 10) * base.toDouble().pow(newStr.length - 1).toInt()
+        }
+        newStr = newStr.substring(1, newStr.length)
+    }
+    return result
+}
 
 /**
  * Сложная (5 баллов)
@@ -328,4 +345,63 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun triple(n: Int): MutableList<String> {
+    val units1 = listOf("ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
+    val units2 = listOf("ноль", "один", "два", "три", "четыр", "пят", "шест", "сем", "восем", "девят")
+    val dozens = listOf("десять", "двенадцать", "надцать", "дцать", "сорок", "десят", "девяносто")
+    val hundreds = listOf("сто", "двести", "ста", "сот")
+    val result = mutableListOf<String>()
+    if (digitNumber(n) > 0) {
+        if ((n / 100) != 0) {
+            if ((n / 100) < 3) {
+                if ((n / 100) == 1) result.add(hundreds[0]) else result.add(hundreds[1])
+            } else {
+                if ((n / 100) == 3 || (n / 100) == 4) result.add(units1[n / 100] + hundreds[2])
+                else result.add(units1[n / 100] + hundreds[3])
+            }
+        }
+        if ((n % 100) / 10 == 1) {
+            if (n % 10 == 0) result.add(dozens[0])
+            if (n % 10 == 2) result.add(dozens[1])
+            else result.add(units2[n % 10] + dozens[2])
+        }
+        if ((n % 100) / 10 != 1) {
+            if ((n % 100) / 10 != 0) {
+                when {
+                    ((n % 100) / 10 == 2 || (n % 100) / 10 == 3) -> result.add(units1[(n % 100) / 10] + dozens[3])
+                    ((n % 100) / 10 == 4) -> result.add(dozens[4])
+                    ((n % 100) / 10 == 9) -> result.add(dozens[6])
+                    else -> result.add(units1[(n % 100) / 10] + dozens[5])
+                }
+            }
+            if (n % 10 != 0) result.add(units1[n % 10])
+        }
+    }
+    return result
+}
+fun russian(n: Int): String {
+    val firstTriple = triple(n / 1000)
+    val secondTriple = triple(n % 1000)
+    val result: List<String>
+    if (digitNumber(n) < 4) return secondTriple.joinToString(separator = " ")
+    else {
+        if ("один" in firstTriple) {
+            firstTriple.remove("один")
+            firstTriple.add("одна")
+            firstTriple.add("тысяча")
+            result = firstTriple + secondTriple
+        } else if ("два" in firstTriple) {
+            firstTriple.remove("два")
+            firstTriple.add("две")
+            firstTriple.add("тысячи")
+            result = firstTriple + secondTriple
+        } else if (("три" in firstTriple) || ("четыре" in firstTriple)) {
+            firstTriple.add("тысячи")
+            result = firstTriple + secondTriple
+        } else {
+            firstTriple.add("тысяч")
+            result = firstTriple + secondTriple
+        }
+    }
+    return result.toList().joinToString(separator = " ")
+}
