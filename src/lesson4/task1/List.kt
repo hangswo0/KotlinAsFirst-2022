@@ -361,9 +361,11 @@ fun triple(n: Int): MutableList<String> {
             }
         }
         if ((n % 100) / 10 == 1) {
-            if (n % 10 == 0) result.add(dozens[0])
-            if (n % 10 == 2) result.add(dozens[1])
-            else result.add(units2[n % 10] + dozens[2])
+            when {
+                (n % 10 == 0) -> result.add(dozens[0])
+                (n % 10 == 2) -> result.add(dozens[1])
+                else -> result.add(units2[n % 10] + dozens[2])
+            }
         }
         if ((n % 100) / 10 != 1) {
             if ((n % 100) / 10 != 0) {
