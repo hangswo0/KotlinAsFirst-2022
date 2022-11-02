@@ -379,13 +379,11 @@ fun russian(n: Int): String {
     else {
         if ("один" in firstTriple) {
             firstTriple.remove("один")
-            firstTriple.add("одна")
-            firstTriple.add("тысяча")
+            firstTriple.add("одна тысяча")
             result = firstTriple + secondTriple
         } else if ("два" in firstTriple) {
             firstTriple.remove("два")
-            firstTriple.add("две")
-            firstTriple.add("тысячи")
+            firstTriple.add("две тысячи")
             result = firstTriple + secondTriple
         } else if (("три" in firstTriple) || ("четыре" in firstTriple)) {
             firstTriple.add("тысячи")
