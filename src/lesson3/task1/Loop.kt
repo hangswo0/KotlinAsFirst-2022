@@ -94,14 +94,11 @@ fun fib(n: Int): Int {
     var f1 = 1
     var f2 = 1
     var fn = 0
-    var currentNumber = 3
-    if ((n == 1) || (n == 2)) return 1 else {
-        while (currentNumber <= n) {
-            fn = f1 + f2
-            f1 = f2
-            f2 = fn
-            currentNumber++
-        }
+    if ((n == 1) || (n == 2)) return 1
+    repeat(n - 2) {
+        fn = f1 + f2
+        f1 = f2
+        f2 = fn
     }
     return fn
 }
@@ -311,7 +308,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Сложная (4 балла)
  *
  * Найти n-ю цифру последовательности из квадратов целых чисел:
- * 149162536496481100121144...
+ * 419162536496481100121144...
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  *
  * Использовать операции со строками в этой задаче запрещается.
