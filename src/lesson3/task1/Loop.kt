@@ -142,16 +142,14 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * этого для какого-либо начального X > 0.
  */
 fun collatzSteps(x: Int): Int {
-    var xNew = 0
+    var xNew = x
     var count = 0
-    var X = x
-    while (X != 1) {
-        if (X % 2 == 0)
-            xNew = X/2
+    while (xNew != 1) {
+        if (xNew % 2 == 0)
+            xNew /= 2
         else
-            xNew = X * 3 + 1
+            xNew = xNew * 3 + 1
         count++
-        X = xNew
     }
     return count
 }
