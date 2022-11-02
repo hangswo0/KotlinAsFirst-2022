@@ -306,9 +306,7 @@ fun squareSequenceDigit(n: Int): Int {
         count += digitNumber(digit.toInt())         //счетчик кол-ва цифр в последовательности
         j += 1.0
         if (count.toInt() < n) continue
-        else {
-            result = (digit % (10.0).pow(count - n + 1)) / ((10.0).pow(count - n))
-        }
+        result = (digit % (10.0).pow(count - n + 1)) / ((10.0).pow(count - n))
     }
     return result.toInt()
 }
@@ -336,9 +334,7 @@ fun fibSequenceDigit(n: Int): Int {
         count += digitNumber(digit.toInt())         //счетчик кол-ва цифр в последовательности
         j += 1.0
         if (count.toInt() < n) continue
-        else {
-            result = (digit % (10.0).pow(count - n + 1)) / ((10.0).pow(count - n))
-        }
+        result = (digit % (10.0).pow(count - n + 1)) / ((10.0).pow(count - n))
     }
     return result.toInt()
 }
