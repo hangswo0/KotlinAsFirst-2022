@@ -239,7 +239,7 @@ fun hasDifferentDigits(n: Int): Boolean {
         }
         newN /= 10
     }
-    if ((counter != -1) || (n == 0)) return false else return true
+    return ((counter == -1) && (n != 0))
 }
 /**
  * Средняя (4 балла)
