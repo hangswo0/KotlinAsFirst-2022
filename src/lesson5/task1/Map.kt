@@ -96,19 +96,31 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *   buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
+    val revertGrades = mutableMapOf<Int, MutableList<String>>()
+    for ((key, value) in grades) {
+        if (revertGrades[value] != null) {
+            revertGrades[value]!!.add(key)
+        } else {
+            revertGrades[value] = mutableListOf(key)
+        }
+    }
+    return revertGrades
+}
 
 /**
  * Простая (2 балла)
  *
  * Определить, входит ли ассоциативный массив a в ассоциативный массив b;
- * это выполняется, если все ключи из a содержатся в b с такими же значениями.
+ * это выполняется, если все ключи из a со
+ * Например:держатся в b с такими же значениями.
  *
- * Например:
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean =
+    a.all { (key, value) -> a[key] == b[key] && b[key] == value }
+
 
 /**
  * Простая (2 балла)

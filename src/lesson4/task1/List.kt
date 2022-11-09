@@ -143,7 +143,13 @@ fun mean(list: List<Double>): Double {
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun center(list: MutableList<Double>): MutableList<Double> {
+    val average = mean(list)
+    for (i in list.indices) {
+        list[i] -= average
+    }
+    return list
+}
 
 /**
  * Средняя (3 балла)
@@ -153,13 +159,9 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
 fun times(a: List<Int>, b: List<Int>): Int {
-    var count = 0
-    if (a.size == 0 && b.size == 0) return 0 else {
-        for (i in 0..a.size - 1) {
-            count += a[i] * b[i]
-        }
-    }
-    return count
+    var result = 0
+    a.forEachIndexed { index, value -> result += a[index] * b[index] }
+    return result
 }
 
 /**
@@ -172,11 +174,7 @@ fun times(a: List<Int>, b: List<Int>): Int {
  */
 fun polynom(p: List<Int>, x: Int): Int {
     var px = 0
-    if (p.size == 0) return 0 else {
-        for (i in 0..p.size - 1) {
-            px += p[i] * ((x.toDouble()).pow(i)).toInt()
-        }
-    }
+    p.forEachIndexed { index, value -> px += p[index] * x.toDouble().pow(index).toInt() }
     return px
 }
 
@@ -191,10 +189,8 @@ fun polynom(p: List<Int>, x: Int): Int {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
-    if (list.size != 0) {
-        for (i in 1..list.size - 1) {
-            list[i] = list[i] + list[i - 1]
-        }
+    for (i in 1..list.size - 1) {
+        list[i] = list[i] + list[i - 1]
     }
     return list
 }
@@ -214,10 +210,9 @@ fun factorize(n: Int): List<Int> {
         if (newN % i == 0) {
             list.add(i)
             newN /= i
-            i = 2
         } else i++
     }
-    return list.toList().sorted()
+    return list
 }
 /**
  * Сложная (4 балла)
