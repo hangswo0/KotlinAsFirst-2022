@@ -3,6 +3,7 @@
 package lesson5.task1
 import lesson4.task1.mean
 import lesson8.task1.findNearestCirclePair
+import java.util.*
 
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
@@ -246,9 +247,11 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
 fun canBuildFrom(chars: List<Char>, word: String): Boolean {
+    val newWord = word.lowercase(Locale.getDefault())
     val charsSet = mutableSetOf<Char>()
-    for (i in word.indices) {
-        if (word[i] !in charsSet) charsSet.add(word[i])
+    chars.forEach { it.lowercaseChar() }
+    for (i in newWord.indices) {
+        if (newWord[i] !in charsSet) charsSet.add(newWord[i])
     }
     return (charsSet == chars.toSet() && word.isNotEmpty()) || (chars.isEmpty() && word.isEmpty())
 }
@@ -265,16 +268,17 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean {
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> {
+fun extractRepeats(list: List<String>): Map<String, Int> = TODO() /*{
     val result = mutableMapOf<String, Int>()
     val stringOfList = list.joinToString(separator = "")
     val setOfList = list.toSet()
     setOfList.forEach { i ->
         if ((stringOfList.length - stringOfList.replace(i, "").length) > 1)
             result[i] = stringOfList.length - stringOfList.replace(i, "").length
+        if ("" in setOfList && )
     }
     return result
-}
+} */
 
 /**
  * Средняя (3 балла)
