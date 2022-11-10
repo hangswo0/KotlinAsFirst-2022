@@ -250,7 +250,7 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean {
     for (i in word.indices) {
         if (word[i] !in charsSet) charsSet.add(word[i])
     }
-    return charsSet == chars.toSet() && word.isNotEmpty()
+    return (charsSet == chars.toSet() && word.isNotEmpty()) || (chars.isEmpty() && word.isEmpty())
 }
 
 /**
@@ -265,7 +265,16 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean {
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
+fun extractRepeats(list: List<String>): Map<String, Int> {
+    val result = mutableMapOf<String, Int>()
+    val stringOfList = list.joinToString(separator = "")
+    val setOfList = list.toSet()
+    setOfList.forEach { i ->
+        if ((stringOfList.length - stringOfList.replace(i, "").length) > 1)
+            result[i] = stringOfList.length - stringOfList.replace(i, "").length
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
