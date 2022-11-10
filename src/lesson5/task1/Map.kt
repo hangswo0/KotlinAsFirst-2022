@@ -250,7 +250,7 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean {
     for (i in word.indices) {
         if (word[i] !in charsSet) charsSet.add(word[i])
     }
-    return charsSet == chars.toSet()
+    return charsSet == chars.toSet() && word.isNotEmpty()
 }
 
 /**
