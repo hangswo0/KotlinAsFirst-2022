@@ -271,8 +271,15 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean {
 fun extractRepeats(list: List<String>): Map<String, Int> {
     val setOfList = list.toSet()
     val result = mutableMapOf<String, Int>()
+    var count = 0
     if (list.size == setOfList.size) return mapOf()
-    setOfList.forEach { result[it] = Collections.frequency(list, it) }
+    setOfList.forEach { element ->
+        for (index in list.indices) {
+            if (element == list[index]) count++
+        }
+        if (count > 1) result[element] = count
+        count = 0
+    }
     result.forEach { (key, value) -> if (value == 1) result.remove(key) }
     return result
 }
