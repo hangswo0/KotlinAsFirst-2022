@@ -280,7 +280,6 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
         if (count > 1) result[element] = count
         count = 0
     }
-    result.forEach { (key, value) -> if (value == 1) result.remove(key) }
     return result
 }
 
