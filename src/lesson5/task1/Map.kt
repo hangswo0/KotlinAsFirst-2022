@@ -249,11 +249,12 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
 fun canBuildFrom(chars: List<Char>, word: String): Boolean {
     val newWord = word.lowercase()
     val charsSet = mutableSetOf<Char>()
-    chars.forEach { it.lowercaseChar() }
+    var newChars = chars
+    newChars = newChars.map { it.lowercaseChar() }
     for (i in newWord.indices) {
         if (newWord[i] !in charsSet) charsSet.add(newWord[i])
     }
-    return (charsSet intersect chars.toSet() == charsSet && word.isNotEmpty()) || word.isEmpty()
+    return (charsSet intersect newChars.toSet() == charsSet && word.isNotEmpty()) || word.isEmpty()
 }
 
 /**
@@ -295,7 +296,9 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
  * Например:
  *   hasAnagrams(listOf("тор", "свет", "рот")) -> true
  */
-fun hasAnagrams(words: List<String>): Boolean = TODO()
+fun hasAnagrams(words: List<String>): Boolean = TODO() /* {
+    val listOfLen = mutableListOf(words.forEach { it.length })
+} */
 
 /**
  * Сложная (5 баллов)
@@ -350,7 +353,21 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    val result = mutableListOf<Int>()
+    if (list.isNotEmpty()) {
+        for (i in 0 until list.size - 1) {
+            for (j in i + 1 until list.size) {
+                if (list[i] + list[j] == number) result.add(i, j)
+            }
+        }
+        return when {
+            result.isEmpty() -> (-1 to -1)
+            else -> (result[0] to result[1])
+        }
+    }
+    return (-1 to -1)
+}
 
 /**
  * Очень сложная (8 баллов)
