@@ -109,14 +109,12 @@ fun fib(n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var divid = 2
-    for (m in 2..n) {
-        if (n % m == 0) {
-            divid = m
-            break
-        }
+    var m = 2.0
+    while (m <= sqrt(n.toDouble())) {
+        if (n % m == 0.0) return m.toInt()
+        m++
     }
-    return divid
+    return n
 }
 /**
  * Простая (2 балла)
@@ -225,22 +223,7 @@ fun isPalindrome(n: Int): Boolean = revert(n) == n
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean {
-    var newN = n / 10
-    var lastDigit = n % 10
-    var counter = 0
-    while (newN > 0) {
-        if (newN % 10 == lastDigit) {
-            counter++
-            lastDigit = newN % 10
-        } else {
-            counter = -1
-            break
-        }
-        newN /= 10
-    }
-    return ((counter == -1) && (n != 0))
-}
+fun hasDifferentDigits(n: Int): Boolean = TODO()
 /**
  * Средняя (4 балла)
  *
@@ -250,28 +233,7 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.sin и другие стандартные реализации функции синуса в этой задаче запрещается.
  */
-fun sin(x: Double, eps: Double): Double {
-    var n = 1
-    var sinX = 0.0
-    var rowMember = x
-    while (abs(rowMember) >= abs(eps)) {
-        when {
-            n % 4.0 == 3.0 -> sinX -= x.pow(n) / factorial(n)
-            else -> sinX += x.pow(n) / factorial(n)
-        }
-        n += 2
-        rowMember = x.pow(n) / factorial(n)
-    }
-    if ((x == PI) || (x == 0.0)) return 0.0 else {
-        val additionalMultiplier = x / (PI / 2.0)
-        when {
-            additionalMultiplier % 2.0 == 0.0 -> sinX = 0.0
-            (additionalMultiplier % 4.0 == 1.0) || (additionalMultiplier % 4.0 == -3.0) -> sinX = 1.0
-            (additionalMultiplier % 4.0 == 3.0) || (additionalMultiplier % 4.0 == -1.0) -> sinX = -1.0
-        }
-    }
-    return sinX
-}
+fun sin(x: Double, eps: Double): Double = TODO()
 
 /**
  * Средняя (4 балла)
@@ -305,7 +267,6 @@ fun squareSequenceDigit(n: Int): Int {
         digit = u            //текущее число
         count += digitNumber(digit.toInt())         //счетчик кол-ва цифр в последовательности
         j += 1.0
-        if (count.toInt() < n) continue
         result = (digit % (10.0).pow(count - n + 1)) / ((10.0).pow(count - n))
     }
     return result.toInt()
@@ -333,7 +294,6 @@ fun fibSequenceDigit(n: Int): Int {
         digit = u                          //текущее число
         count += digitNumber(digit.toInt())         //счетчик кол-ва цифр в последовательности
         j += 1.0
-        if (count.toInt() < n) continue
         result = (digit % (10.0).pow(count - n + 1)) / ((10.0).pow(count - n))
     }
     return result.toInt()
