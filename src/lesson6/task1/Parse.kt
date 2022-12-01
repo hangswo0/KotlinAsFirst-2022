@@ -89,7 +89,7 @@ fun dateStrToDigit(str: String): String = TODO()
  */
 fun dateDigitToStr(digital: String): String {
     var result = ""
-    if (Regex("""\d{2}\.\d{2}\.\d{4}""").matches(digital)) {
+    if (Regex("""\d{2}\.\d{2}\.\d*""").matches(digital)) {
         val parts = digital.split(".")
         val months = listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря")
         if (parts[2].toInt() > 0) {
@@ -122,13 +122,8 @@ fun dateDigitToStr(digital: String): String {
  */
 fun flattenPhoneNumber(phone: String): String {
     var result = phone
-    if (result.contains(Regex("""[^\d\s\(\)\+-]""")) || result.contains(Regex("""\(\)"""))) return ""
-    else {
-        result = Regex("""\s*""").replace(result, "")
-        result = Regex("""(\)*|\(*)""").replace(result, "")
-        result = Regex("""-*""").replace(result, "")
-    }
-    return result
+    return if (result.contains(Regex("""[^\d\s\(\)\+-]""")) || result.contains(Regex("""\(\)"""))) ""
+    else Regex("""[-\s\(\)]""").replace(result, "")
 }
 
 /**
