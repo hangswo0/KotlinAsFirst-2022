@@ -76,6 +76,7 @@ fun main() {
  */
 fun dateStrToDigit(str: String): String = TODO()
 
+
 /**
  * Средняя (4 балла)
  *
@@ -86,7 +87,24 @@ fun dateStrToDigit(str: String): String = TODO()
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    var result = ""
+    if (Regex("""\d{2}\.\d{2}\.\d{4}""").matches(digital)) {
+        val parts = digital.split(".")
+        val months = listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря")
+        if (parts[2].toInt() > 0) {
+            when {
+                (parts[2].toInt() % 4 == 0) && (parts[1].toInt() == 2) && (parts[0].toInt() == 29) -> result = "29 " + months[1] + " " + parts[2]
+                (parts[2].toInt() % 4 != 0) && (parts[1].toInt() == 2) && (parts[0].toInt() == 29) -> result
+                (parts[1].toInt() in listOf(4, 6, 9, 11)) && (parts[0].toInt() <= 30) -> result = "${parts[0].toInt()} " + months[parts[1].toInt() - 1] + " " + parts[2]
+                (parts[1].toInt() == 2) && (parts[0].toInt() <= 28) && (parts[2].toInt() % 4 != 0) -> result = "${parts[0].toInt()} " + months[1] + " " + parts[2]
+                (parts[0].toInt() > 31) || (parts[1].toInt() < 1) || (parts[1].toInt() > 12) || (parts[2].toInt() < 0) -> result
+                else -> result = "${parts[0].toInt()} " + months[parts[1].toInt() - 1] + " " + parts[2]
+            }
+        }
+    }
+    return result
+}
 
 /**
  * Средняя (4 балла)
@@ -102,7 +120,16 @@ fun dateDigitToStr(digital: String): String = TODO()
  *
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String {
+    var result = phone
+    if (result.contains(Regex("""[^\d\s\(\)\+-]""")) || result.contains(Regex("""\(\)"""))) return ""
+    else {
+        result = Regex("""\s*""").replace(result, "")
+        result = Regex("""(\)*|\(*)""").replace(result, "")
+        result = Regex("""-*""").replace(result, "")
+    }
+    return result
+}
 
 /**
  * Средняя (5 баллов)
@@ -114,7 +141,18 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    var resultStr = jumps
+    var resultList: MutableList<String>
+    var maximum = -100
+    if (jumps.contains(Regex("""[^\d\s%-]""")) || !jumps.contains(Regex("""\d"""))) return -1
+    else {
+        resultStr = Regex("""(-\s|%\s)""").replace(resultStr, "")
+        resultList = resultStr.split(" ").toMutableList()
+        resultList.forEach { if (maximum < it.toInt()) maximum = it.toInt() }
+    }
+    return maximum
+}
 
 /**
  * Сложная (6 баллов)
