@@ -95,7 +95,6 @@ fun dateDigitToStr(digital: String): String {
         if (parts[2].toInt() > 0) {
             when {
                 (parts[2].toInt() % 4 == 0) && (parts[1].toInt() == 2) && (parts[0].toInt() == 29) -> result = "29 " + months[1] + " " + parts[2]
-                (parts[2].toInt() % 4 != 0) && (parts[1].toInt() == 2) && (parts[0].toInt() == 29) -> result
                 (parts[1].toInt() in listOf(4, 6, 9, 11)) && (parts[0].toInt() <= 30) -> result = "${parts[0].toInt()} " + months[parts[1].toInt() - 1] + " " + parts[2]
                 (parts[1].toInt() == 2) && (parts[0].toInt() <= 28) && (parts[2].toInt() % 4 != 0) -> result = "${parts[0].toInt()} " + months[1] + " " + parts[2]
                 (parts[0].toInt() > 31) || (parts[1].toInt() < 1) || (parts[1].toInt() > 12) || (parts[2].toInt() < 0) -> result
@@ -122,7 +121,7 @@ fun dateDigitToStr(digital: String): String {
  */
 fun flattenPhoneNumber(phone: String): String {
     var result = phone
-    return if (result.contains(Regex("""[^\d\s\(\)\+-]""")) || result.contains(Regex("""\(\)"""))) ""
+    return if (result.contains(Regex("""[^\d\s\(\)\+-]""")) || result.contains(Regex("""\(\)""")) || !result.contains(Regex("""\d"""))) ""
     else Regex("""[-\s\(\)]""").replace(result, "")
 }
 
