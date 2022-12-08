@@ -140,12 +140,9 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean =
  *     -> a changes to mutableMapOf() aka becomes empty
  */
 fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Map<String, String> {
-    val listToRemove = mutableListOf<String>()
-    for ((key, value) in a) {
-        if (b[key] == value) listToRemove.add(key)
-    }
-    for (key in listToRemove) {
-        a.remove(key)
+    val mapToRemove = a.toMap()
+    for ((key, value) in mapToRemove) {
+        if (b[key] == value) a.remove(key)
     }
     return a
 }
@@ -353,11 +350,16 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     var indexes = -1 to -1
-    if (number == 0 && list.size == 1) return indexes
-    if (number == 0 && list.size > 1) return list.indexOf(number) to list.lastIndexOf(number)
-    for (i in list.indices) {
-        if ((number - list[i]) in list) indexes = i to list.indexOf(number - list[i])
-        break
+    val listOfPair = mutableListOf<Int>()
+    if (list.size > 1) {
+        for (i in 0..number / 2 + 1) {
+            if (i in list && (number - i) in list && list.indexOf(i) != list.indexOf(number - i)) {
+                listOfPair.add(list.indexOf(i))
+                listOfPair.add(list.indexOf(number - i))
+                listOfPair.sorted()
+                indexes = listOfPair[0] to listOfPair[1]
+            }
+        }
     }
     return indexes
 }
