@@ -1,7 +1,6 @@
 @file:Suppress("UNUSED_PARAMETER", "ConvertCallChainIntoSequence")
 
 package lesson6.task1
-
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
 // Рекомендуемое количество баллов = 11
@@ -159,7 +158,17 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    var maximum = -1
+    if (Regex("""\d+\s*\+""").containsMatchIn(jumps) && !Regex("""[^%\-\d\s\+]""").containsMatchIn(jumps)) {
+        val result = Regex("""\d+\s*\+""").findAll(jumps)
+        for (i in result) {
+            val j = i.value.replace(" +", "")
+            maximum = maxOf(j.toInt(), maximum)
+        }
+    }
+    return maximum
+}
 
 /**
  * Сложная (6 баллов)
