@@ -82,7 +82,21 @@ fun deleteMarked(inputName: String, outputName: String) {
  *
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
-    TODO()
+    val result = mutableMapOf<String, Int>()
+    val substringsLowerCase = substrings.map { it.lowercase() }
+    substrings.forEach { result[it] = 0 }
+    for (key in substringsLowerCase) {
+        var count = 0
+        for (line in File(inputName).readLines()) {
+            var lineLowerCase = line.lowercase()
+            while (key in lineLowerCase) {
+                count++
+                lineLowerCase = lineLowerCase.substring(lineLowerCase.indexOf(key) + 1)
+            }
+        }
+        result[substrings[substringsLowerCase.indexOf(key)]] = count
+    }
+    return result
 }
 
 
@@ -101,8 +115,25 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  */
 fun sibilants(inputName: String, outputName: String) {
     TODO()
+    /* val writer = File(outputName).bufferedWriter()
+    val replaceMap = mapOf("Я" to "А", "я" to "а", "Ю" to "У", "ю" to "у", "Ы" to "И", "ы" to "и")
+    for (line in File(inputName).readLines()) {
+        if (Regex("""[ЖШЩЧжщшч][ЫЯЮыяю]""").containsMatchIn(line)) {
+            for ((key, value) in replaceMap) {
+                if (key in line) {
+                    val indexOfVowel = line.indexOf(key)
+                    if (line[indexOfVowel - 1] in "ЖШЩЧжшщч") {
+                        val corLine = StringBuilder(line)
+                        val correctLine = corLine.replaceRange(indexOfVowel, indexOfVowel + 1, value)
+                        writer.write("$correctLine\n")
+                    }
+                }
+            }
+        } else writer.write("$line\n")
+    }
+    writer.close() */
 }
-
+//Использовать findAll  заменять только их
 /**
  * Средняя (15 баллов)
  *
