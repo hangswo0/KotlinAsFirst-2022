@@ -155,13 +155,12 @@ fun centerFile(inputName: String, outputName: String) {
     var correctLine = ""
     var countLine = 0
     File(inputName).readLines().forEach {
-        maxLine = maxOf(maxLine, it.length)
+        maxLine = maxOf(maxLine, it.trim().length)
         countLine++
     }
     for (line in File(inputName).readLines()) {
         if (countLine > 1) {
-            correctLine = line.trim()
-            correctLine = " ".repeat((maxLine - correctLine.length) / 2) + correctLine
+            correctLine = " ".repeat((maxLine - correctLine.length) / 2) + line.trim()
             writer.write("$correctLine\n")
         } else {
             correctLine = line.trim()
