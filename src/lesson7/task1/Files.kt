@@ -114,7 +114,8 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    val writer = File(outputName).bufferedWriter()
+    TODO()
+    /* val writer = File(outputName).bufferedWriter()
     val replacement = mapOf("Ы" to "И", "ы" to "и", "Ю" to "У", "ю" to "у", "Я" to "А", "я" to "а")
     for (line in File(inputName).readLines()) {
         var correctLine = line
@@ -126,7 +127,7 @@ fun sibilants(inputName: String, outputName: String) {
             writer.write("$correctLine\n")
         } else writer.write("$line\n")
     }
-    writer.close()
+    writer.close() */
 }
 //Использовать findAll  заменять только их
 /**
@@ -153,9 +154,7 @@ fun centerFile(inputName: String, outputName: String) {
     File(inputName).readLines().forEach { maxLine = maxOf(maxLine, it.length) }
     for (line in File(inputName).readLines()) {
         correctLine = line.trim()
-        if (maxLine - correctLine.length % 2 == 0) {
-            correctLine = " ".repeat((maxLine - correctLine.length) / 2) + correctLine
-        }
+        correctLine = " ".repeat((maxLine - correctLine.length) / 2) + correctLine
         writer.write("$correctLine\n")
     }
     writer.close()
