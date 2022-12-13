@@ -86,23 +86,8 @@ fun dateStrToDigit(str: String): String = TODO()
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String {
-    var result = ""
-    if (Regex("""\d{2}\.\d{2}\.\d*""").matches(digital)) {
-        val parts = digital.split(".")
-        val months = listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря")
-        if (parts[2].toInt() > 0) {
-            when {
-                (parts[2].toInt() % 4 == 0) && (parts[1].toInt() == 2) && (parts[0].toInt() == 29) -> result = "29 " + months[1] + " " + parts[2]
-                (parts[1].toInt() in listOf(4, 6, 9, 11)) && (parts[0].toInt() <= 30) -> result = "${parts[0].toInt()} " + months[parts[1].toInt() - 1] + " " + parts[2]
-                (parts[1].toInt() == 2) && (parts[0].toInt() <= 28) && (parts[2].toInt() % 4 != 0) -> result = "${parts[0].toInt()} " + months[1] + " " + parts[2]
-                (parts[0].toInt() > 31) || (parts[1].toInt() < 1) || (parts[1].toInt() > 12) || (parts[2].toInt() < 0) -> result
-                else -> result = "${parts[0].toInt()} " + months[parts[1].toInt() - 1] + " " + parts[2]
-            }
-        }
-    }
-    return result
-}
+fun dateDigitToStr(digital: String): String = TODO()
+
 
 /**
  * Средняя (4 балла)
@@ -182,11 +167,10 @@ fun bestHighJump(jumps: String): Int {
 fun plusMinus(expression: String): Int {
     if (!Regex("""(\d\s\d|[-\+]\s[-\+]|[-\+]\d|\d[-\+])""").containsMatchIn(expression) &&
         !expression.startsWith("+") && !expression.startsWith("-")) {
-        var value = Regex("""(\s\+\s|\s-\s)""").split(expression).map { it.toInt() }.sum() //список строк
+        var value = Regex("""(\s\+\s|\s-\s)""").split(expression).sumOf { it.toInt() }
         val minus = Regex("""-\s\d+""").findAll(expression)
         for (i in minus) {
-            val j = i.value.replace("- ", "")
-            value -= j.toInt() * 2
+            value -= i.value.replace("- ", "").toInt() * 2
         }
         return value
     } else throw IllegalArgumentException()

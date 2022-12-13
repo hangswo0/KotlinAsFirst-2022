@@ -97,7 +97,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
         result[substrings[substringsLowerCase.indexOf(key)]] = count
     }
     return result
-}
+} /////
 
 
 /**
