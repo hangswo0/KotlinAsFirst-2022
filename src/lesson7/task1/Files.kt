@@ -114,24 +114,19 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
-    /* val writer = File(outputName).bufferedWriter()
-    val replaceMap = mapOf("Я" to "А", "я" to "а", "Ю" to "У", "ю" to "у", "Ы" to "И", "ы" to "и")
+    val writer = File(outputName).bufferedWriter()
+    val replacement = mapOf("Ы" to "И", "ы" to "и", "Ю" to "У", "ю" to "у", "Я" to "А", "я" to "а")
     for (line in File(inputName).readLines()) {
-        if (Regex("""[ЖШЩЧжщшч][ЫЯЮыяю]""").containsMatchIn(line)) {
-            for ((key, value) in replaceMap) {
-                if (key in line) {
-                    val indexOfVowel = line.indexOf(key)
-                    if (line[indexOfVowel - 1] in "ЖШЩЧжшщч") {
-                        val corLine = StringBuilder(line)
-                        val correctLine = corLine.replaceRange(indexOfVowel, indexOfVowel + 1, value)
-                        writer.write("$correctLine\n")
-                    }
-                }
+        var correctLine = line
+        if (Regex("""[ЖШЩЧжшщч][ЫЯЮыяю]""").containsMatchIn(line)) {
+            line.forEach {
+                if (it in "ЫЯЮыяю" && line[line.indexOf(it) - 1] in "ЖШЩЧжшщч")
+                    correctLine = line.replace(it.toString(), replacement[it.toString()]!!)
             }
+            writer.write("$correctLine\n")
         } else writer.write("$line\n")
     }
-    writer.close() */
+    writer.close()
 }
 //Использовать findAll  заменять только их
 /**
@@ -152,7 +147,18 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    var maxLine = 0
+    var correctLine = ""
+    File(inputName).readLines().forEach { maxLine = maxOf(maxLine, it.length) }
+    for (line in File(inputName).readLines()) {
+        correctLine = line.trim()
+        if (maxLine - correctLine.length % 2 == 0) {
+            correctLine = " ".repeat((maxLine - correctLine.length) / 2) + correctLine
+        }
+        writer.write("$correctLine\n")
+    }
+    writer.close()
 }
 
 /**
