@@ -153,7 +153,7 @@ fun centerFile(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     var maxLine = 0
     var correctLine = ""
-    File(inputName).readLines().forEach { maxLine = maxOf(maxLine, it.length) }
+    File(inputName).readLines().forEach { maxLine = maxOf(maxLine, it.trim().length) }
     for (line in File(inputName).readLines()) {
         correctLine = line.trim()
         correctLine = " ".repeat((maxLine - correctLine.length) / 2) + line.trim()
