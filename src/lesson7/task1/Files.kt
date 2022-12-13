@@ -85,6 +85,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     val result = mutableMapOf<String, Int>()
     val substringsLowerCase = substrings.map { it.lowercase() }
     substrings.forEach { result[it] = 0 }
+    var indexKey = 0
     for (key in substringsLowerCase) {
         var count = 0
         for (line in File(inputName).readLines()) {
@@ -94,10 +95,11 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
                 lineLowerCase = lineLowerCase.substring(lineLowerCase.indexOf(key) + 1)
             }
         }
-        result[substrings[substringsLowerCase.indexOf(key)]] = count
+        result[substrings[indexKey]] = count
+        indexKey++
     }
     return result
-} /////
+}
 
 
 /**
