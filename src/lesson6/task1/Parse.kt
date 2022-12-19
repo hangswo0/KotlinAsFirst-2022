@@ -104,7 +104,7 @@ fun dateDigitToStr(digital: String): String = TODO()
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
 fun flattenPhoneNumber(phone: String): String {
-    var result = phone
+    val result = phone
     return if (result.contains(Regex("""[^\d\s\(\)\+-]""")) || result.contains(Regex("""\(\)""")) || !result.contains(Regex("""\d"""))) ""
     else Regex("""[-\s\(\)]""").replace(result, "")
 }
@@ -120,15 +120,11 @@ fun flattenPhoneNumber(phone: String): String {
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
-    var resultStr = jumps
-    val resultList: MutableList<String>
+    val resultStr = jumps
     var maximum = -100
     if (jumps.contains(Regex("""[^\d\s%-]""")) || !jumps.contains(Regex("""\d"""))) return -1
-    else {
-        resultStr = Regex("""(-\s|%\s)""").replace(resultStr, "")
-        resultList = resultStr.split(" ").toMutableList()
-        resultList.forEach { if (maximum < it.toInt()) maximum = it.toInt() }
-    }
+    val resultList = Regex("""(-\s|%\s)""").replace(resultStr, "").split(" ").toList()
+    resultList.forEach { if (maximum < it.toInt()) maximum = it.toInt() }
     return maximum
 }
 

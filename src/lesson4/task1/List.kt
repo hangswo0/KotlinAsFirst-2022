@@ -159,9 +159,7 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
 fun times(a: List<Int>, b: List<Int>): Int {
-    var result = 0
-    a.forEachIndexed { index, value -> result += a[index] * b[index] }
-    return result
+    return a.mapIndexed { index, value -> a[index] * b[index] }.sum()
 }
 
 /**
@@ -173,9 +171,7 @@ fun times(a: List<Int>, b: List<Int>): Int {
  * Значение пустого многочлена равно 0 при любом x.
  */
 fun polynom(p: List<Int>, x: Int): Int {
-    var px = 0
-    p.forEachIndexed { index, value -> px += p[index] * x.toDouble().pow(index).toInt() }
-    return px
+    return p.mapIndexed { index, value -> p[index] * x.toDouble().pow(index).toInt() }.sum()
 }
 
 /**

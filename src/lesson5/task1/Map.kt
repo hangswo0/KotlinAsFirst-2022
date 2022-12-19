@@ -140,9 +140,8 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean =
  *     -> a changes to mutableMapOf() aka becomes empty
  */
 fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Map<String, String> {
-    val mapToRemove = a.toMap()
-    for ((key, value) in mapToRemove) {
-        if (b[key] == value) a.remove(key)
+    for ((key, value) in b) {
+        if (a[key] == value) a.remove(key)
     }
     return a
 }
@@ -196,8 +195,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
         if (mapStock[key] == null) mapStock[key] = mutableListOf(value)
         else mapStock[key]!! += value
     }
-    for ((key, value) in mapStock) mapStockPrice[key] = mean(value)
-    return mapStockPrice
+    return mapStock.mapValues { mean(it.value) }
 }
 
 /**
@@ -231,8 +229,7 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
 fun canBuildFrom(chars: List<Char>, word: String): Boolean {
     val newWord = word.lowercase()
     val charsSet = mutableSetOf<Char>()
-    var newChars = chars
-    newChars = newChars.map { it.lowercaseChar() }
+    val newChars = chars.map { it.lowercaseChar() }
     for (i in newWord.indices) {
         if (newWord[i] !in charsSet) charsSet.add(newWord[i])
     }
