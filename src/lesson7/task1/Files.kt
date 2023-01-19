@@ -3,6 +3,8 @@
 package lesson7.task1
 
 import java.io.File
+import java.lang.IllegalArgumentException
+import kotlin.math.abs
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -85,8 +87,19 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     val result = mutableMapOf<String, Int>()
     val substringsLowerCase = substrings.map { it.lowercase() }
     substrings.forEach { result[it] = 0 }
-    var indexKey = 0
-    for (key in substringsLowerCase) {
+    //var indexKey = 0
+    for (line in File(inputName).readLines()) {
+        var lineLowerCase = line.lowercase()
+        result.forEach { key, value ->
+            var modValue = value
+            while (key in lineLowerCase) {
+                modValue++
+                lineLowerCase = lineLowerCase.substring(lineLowerCase.indexOf(key) + 1)
+            }
+            result[key] = modValue
+        }
+    }
+    /* for (key in substringsLowerCase) {
         var count = 0
         for (line in File(inputName).readLines()) {
             var lineLowerCase = line.lowercase()
@@ -97,7 +110,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
         }
         result[substrings[indexKey]] = count
         indexKey++
-    }
+    } */
     return result
 }
 
@@ -498,3 +511,22 @@ fun printDivisionProcess(lhv: Int, rhv: Int, outputName: String) {
     TODO()
 }
 
+fun myFun(inputName: String, range: String): Double {
+    var result = 0.0 //числитель результата
+    var divider = 0  //знаменатель результата
+    if (Regex("""\w\d-\w\d""").containsMatchIn(range)) throw IllegalArgumentException()
+    val widthList = Regex("""[\d-]""").split(range).map { it.toInt() }
+    val width = abs(widthList[0] - widthList[1]) + 1 //ширина (буквы)
+    val lengthList = Regex("""[\w-]""").split(range).map { it.toInt() }
+    var length = abs(lengthList[0] - lengthList[1]) + 1 //длина (цифры)
+    for (line in File(inputName).readLines()) {
+        while (length >= 0) {
+            if (Regex("""[^\d\s\,-\.]""").containsMatchIn(line)) throw IllegalArgumentException()
+            val values = Regex(""",\s""").split(line).map { it.toInt() } //значения из строки
+            result += values.subList(0, width + 1).sum().toDouble()
+            divider += values.subList(0, width + 1).size
+        }
+        length -= 1
+    }
+    return result / divider
+}
